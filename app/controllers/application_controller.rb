@@ -155,6 +155,54 @@ class Application
         return [404, {"Content-Type" => "application/json"}, [{error: "task not found."}.to_json]]
       end #if : task exists & destroyed
 
+        # users get read (tested)
+      elsif req.path.match(/users/) && req.get?
+        return [200, { 'Content-Type' => 'application/json' }, [ {:message => "users successfully requested", :users => User.render_all_formatted_for_frontend}.to_json ]]
+
+      # users post/create (tested)
+      elsif req.path.match(/users/) && req.post?
+        hash = JSON.parse(req.body.read)
+        board = Board.find_by_id(hash["board_id"])
+
+        if board
+          user = User.create_new_user_with_defaults(hash) #custom method
+
+          if user.save
+            return [200, { 'Content-Type' => 'application/json' }, [ {:message => "user successfully added", :user => user}.to_json ]]
+          else
+            return [422, { 'Content-Type' => 'application/json' }, [ {:error => "user not added. Invalid Data"}.to_json ]]
+          end #end validation of post
+        else
+          return [422, { 'Content-Type' => 'application/json' }, [ {:error => "user not added. Invalid Board Id."}.to_json ]]
+        end #if: check if board  exists
+
+       # tasks patch/update (tested)
+      elsif req.path.match(/users/) && req.patch?
+        user = User.find_by_path(req.path, "/users/")
+
+        if user
+          data = JSON.parse(req.body.read)
+
+          if user.update(data)
+          return [200, {"Content-Type" => "application/json"}, [{message: "user successfully updated", user: user}.to_json]]
+          else
+            return [422, {"Content-Type" => "application/json"}, [{error: "user not updated. Invalid data."}.to_json]]
+          end # if: update was successful
+
+        else
+          return [404, {"Content-Type" => "application/json"}, [{error: "user not found."}.to_json]]
+        end #if : user exists
+
+      # tasks delete (tested)
+      elsif req.path.match(/users/) && req.delete?
+        user = User.find_by_path(req.path, "/users/")
+
+        if user && user.destroy
+          return [200, {"Content-Type" => "application/json"}, [{message: "user successfully deleted", user: user}.to_json]]
+        else
+          return [404, {"Content-Type" => "application/json"}, [{error: "user not found."}.to_json]]
+        end #if : user exists & destroyed
+
 
 
     else

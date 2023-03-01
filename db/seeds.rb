@@ -3,24 +3,25 @@ puts "Clearing old data..."
 Task.destroy_all
 Board.destroy_all
 Project.destroy_all
+User.destroy_all
 
 puts "Seeding projects..."
 project1 = Project.create(
     title: 'Project 1',
     favorite: false,
-    color: '#e1bee7'
+    color: '#cebee7'
 )
 
 project2 = Project.create(
     title: 'Project 2',
     favorite: true,
-    color: '#e1bee7'
+    color: '#d5bee7'
 )
 
 project3 = Project.create(
     title: 'Project 3',
     favorite: false,
-    color: '#e1bee7'
+    color: '#dfbee7'
 )
 
 puts "Seeding boards..."
@@ -131,5 +132,32 @@ project3_todo.tasks.build(
 
 project1_todo.save
 
+puts "Seeding users..."
+
+
+project1 = Project.create(name: "Project 1")
+project2 = Project.create(name: "Project 2")
+project3 = Project.create(name: "Project 3")
+
+user1 = User.create(
+  name: "John Doe",
+  email: "john.doe@example.com",
+  password: "password",
+  project_id: "project1"
+)
+
+user2 = User.create(
+  name: "Jane Smith",
+  email: "jane.smith@example.com",
+  password: "password",
+  project_id: "project2"
+)
+
+user3 = User.create(
+  name: "Bob Johnson",
+  email: "bob.johnson@example.com",
+  password: "password",
+  project_id: "project3"
+)
 
 puts "Done Seeding!"
