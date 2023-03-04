@@ -20,6 +20,7 @@ class Task < ActiveRecord::Base
             board_id: task.board_id,
             project: task.board.project.title,
             project_id: task.board.project_id,
+            user_id: task.user_id,
             created_at: task.created_at,
             updated_at: task.updated_at
             }

@@ -176,7 +176,7 @@ class Application
           return [422, { 'Content-Type' => 'application/json' }, [ {:error => "user not added. Invalid Board Id."}.to_json ]]
         end #if: check if board  exists
 
-       # tasks patch/update (tested)
+       # user patch/update (tested)
       elsif req.path.match(/users/) && req.patch?
         user = User.find_by_path(req.path, "/users/")
 
@@ -193,7 +193,7 @@ class Application
           return [404, {"Content-Type" => "application/json"}, [{error: "user not found."}.to_json]]
         end #if : user exists
 
-      # tasks delete (tested)
+      # user delete (tested)
       elsif req.path.match(/users/) && req.delete?
         user = User.find_by_path(req.path, "/users/")
 

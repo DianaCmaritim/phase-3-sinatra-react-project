@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_01_113314) do
+ActiveRecord::Schema.define(version: 2023_03_02_055532) do
 
   create_table "boards", force: :cascade do |t|
     t.string "name"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 2023_03_01_113314) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image_url"
+    t.integer "user_id"
     t.index ["board_id"], name: "index_tasks_on_board_id"
   end
 

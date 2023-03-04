@@ -9,19 +9,22 @@ puts "Seeding projects..."
 project1 = Project.create(
     title: 'Project 1',
     favorite: false,
-    color: '#cebee7'
+    color: '#cebee7',
+    user_id: 3
 )
 
 project2 = Project.create(
     title: 'Project 2',
     favorite: true,
-    color: '#d5bee7'
+    color: '#d5bee7',
+    user_id: 4
 )
 
 project3 = Project.create(
     title: 'Project 3',
     favorite: false,
-    color: '#dfbee7'
+    color: '#dfbee7',
+    user_id: 2
 )
 
 puts "Seeding boards..."
@@ -48,7 +51,8 @@ project1_todo.tasks.build(
     status: 'Not Started',
     image_url: 'https://www.pexels.com/photo/silhouette-of-two-persons-stargazing-1567069/',
     priority: 'High',
-    completed: false
+    completed: false,
+    user_id: 5
 )
 
 project1_todo.tasks.build(
@@ -58,7 +62,8 @@ project1_todo.tasks.build(
     status: 'Not Started',
     image_url: 'https://www.pexels.com/photo/hand-touching-white-cat-15563929/',
     priority: 'Low',
-    completed: false
+    completed: false,
+    user_id: 4
 )
 
 project1_todo.save
@@ -70,7 +75,8 @@ project1_completed.tasks.build(
     status: 'Complete',
     image_url: 'https://www.pexels.com/photo/group-of-people-enjoying-music-concert-325521/',
     priority: 'Medium',
-    completed: true
+    completed: true,
+    user_id: 3
 )
 
 project1_completed.save
@@ -82,7 +88,8 @@ project2_todo.tasks.build(
     status: 'Not Started',
     image_url: 'https://www.pexels.com/photo/colorful-arts-hanging-on-wall-2372978/',
     priority: 'Low',
-    completed: false
+    completed: false,
+    user_id: 2
 )
 
 project2_todo.tasks.build(
@@ -92,7 +99,8 @@ project2_todo.tasks.build(
     status: 'Not Started',
     image_url: 'https://www.pexels.com/photo/sticker-of-climate-crisis-attached-in-metal-3671143/',
     priority: 'Low',
-    completed: false
+    completed: false,
+    user_id: 1
 )
 
 project2_todo.save
@@ -104,7 +112,8 @@ project2_completed.tasks.build(
     status: 'Complete',
     image_url: 'https://www.pexels.com/photo/photo-of-woman-doing-yoga-3820393/',
     priority: 'Medium',
-    completed: true
+    completed: true,
+    user_id: 1
 )
 
 project2_completed.save
@@ -116,8 +125,10 @@ project3_todo.tasks.build(
     status: 'Not Started',
     image_url: 'https://www.pexels.com/photo/sharing-cherry-tomatoes-3184188/',
     priority: 'High',
-    completed: false
+    completed: false,
+    user_id: 2
 )
+project3_todo.save
 
 project3_todo.tasks.build(
     name: 'CloudFleet',
@@ -126,11 +137,23 @@ project3_todo.tasks.build(
     status: 'Not Started',
     image_url: 'https://www.pexels.com/photo/white-volvo-semi-truck-on-side-of-road-2199293/',
     priority: 'Low',
-    completed: false
+    completed: false,
+    user_id: 5
 )
+project3_todo.save
 
 
-project1_todo.save
+project3_todo.tasks.build(
+    name: 'Dairy Farming',
+    due_date: Date.new(2023, 3, 9),
+    description: 'This is a project that focuses on breeding of different breeds of cows for the purpose of increasing milk and meat production',
+    status: 'Started',
+    image_url: 'https://images.pexels.com/photos/10829198/pexels-photo-10829198.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    priority: 'Medium',
+    completed: false,
+    user_id: 4
+)
+project3_completed.save
 
 puts "Seeding users..."
 
@@ -158,6 +181,20 @@ user3 = User.create(
   email: "bob.johnson@example.com",
   password: "password",
   project_id: "project3"
+)
+
+user4 = User.create(
+    name: "Mary Johnson",
+    email: "mary.johson@me.com",
+    password: "password",
+    project_id: "project3"
+)
+
+user5 = User.create(
+    name: "Harry Doe",
+    email: "harry.doe@example.com",
+    password: "password",
+    project_id: "project3"
 )
 
 puts "Done Seeding!"
